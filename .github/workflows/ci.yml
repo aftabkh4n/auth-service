@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify repo structure
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Files in repo:"
+          ls -la
+
+      - name: Check Dockerfile exists
+        run: test -f Dockerfile && echo "Dockerfile found" || echo "No Dockerfile yet"
